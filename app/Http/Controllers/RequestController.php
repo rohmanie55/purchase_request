@@ -138,9 +138,9 @@ class RequestController extends Controller
 
             RequestDetail::where('request_id', $id)->delete();
 
-            return redirect()->route('request.index')->with('success', 'Delete User Successfull!');
+            return redirect()->route('request.index')->with('success', 'Delete Request Successfull!');
        } catch (\Throwable $th) {
-            return redirect()->route('request.index')->with('fail', 'Delete User Failed!');
+            return redirect()->route('request.index')->with('fail', 'Delete Request Failed!');
        }
     }
 }

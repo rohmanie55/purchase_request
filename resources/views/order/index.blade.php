@@ -46,7 +46,7 @@
                                     <th>Tgl Order</th>
                                     <th>Supplier</th>
                                     <th>Total</th>
-                                    <th class="none">Detail</th>
+                                    <th class="none">Detail Order</th>
                                     <th style="width: 15%;">Option</th>
                                 </tr>
                                 </thead>
@@ -57,15 +57,14 @@
                                     <td>{{ $order->no_order }}</td>
                                     <td>{{ $order->tgl_order }}</td>
                                     <td>{{ $order->supplier->kd_supp ?? "" }} - {{ $order->supplier->nm_supp }}</td>
-                                    <td>{{ $order->total }}</td>
+                                    <td>@currency($order->total)</td>
                                     <td>
                                         <table style="width: 100%">
                                             @foreach ($order->details as $idx=>$detail)
                                             <tr>
-                                                <td>{{ $idx+1 }}</td>
                                                 <td>{{$detail->barang->kd_barang }} - {{ $detail->barang->nm_brg }}</td>
                                                 <td>{{ $detail->qty_order }}</td>
-                                                <td>{{ $detail->subtotal }}</td>
+                                                <td>@currency($detail->subtotal)</td>
                                             </tr>
                                             @endforeach
                                         </table>

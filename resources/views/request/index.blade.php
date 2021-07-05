@@ -38,7 +38,7 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table id="table" class="display table table-striped table-hover"  width="100%">
+                            <table id="table" class="display table table-striped "  width="100%">
                                 <thead>
                                 <tr>
                                     <th>#</th>
@@ -46,7 +46,7 @@
                                     <th>Tgl Request</th>
                                     <th>Tgl Butuh</th>
                                     <th>User Request</th>
-                                    <th class="none">Detail</th>
+                                    <th class="none">Detail Request</th>
                                     <th style="width: 15%;">Option</th>
                                 </tr>
                                 </thead>
@@ -60,9 +60,12 @@
                                     <td>{{ $request->user->name }}</td>
                                     <td>
                                         <table style="width: 100%">
+                                            <tr>
+                                                <td>Barang</td>
+                                                <td>Jumlah</td>
+                                            </tr>
                                             @foreach ($request->details as $idx=>$detail)
                                             <tr>
-                                                <td>{{ $idx+1 }}</td>
                                                 <td>{{$detail->barang->kd_barang }} - {{ $detail->barang->nm_brg }}</td>
                                                 <td>{{ $detail->qty_request }}</td>
                                             </tr>

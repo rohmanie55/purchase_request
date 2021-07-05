@@ -1,5 +1,5 @@
 @extends('layouts.main')
-@section('title') Manage Barang @endsection
+@section('title') Master Barang @endsection
 @section('content')
 <div class="page-inner">
     <div class="page-inner">

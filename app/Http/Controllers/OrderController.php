@@ -29,6 +29,7 @@ class OrderController extends Controller
      */
     public function create()
     {
+        //clean data
         $requests = PRequest::with(['details'=> function ($query) {
             $query->selectRaw('request_details.id,request_id,request_details.barang_id,qty_request, qty_request - COALESCE(SUM(qty_order), 0) as qty_sisa, barangs.id b_id, kd_barang, nm_brg,harga')
             ->leftJoin('order_details', 'request_details.id', '=', 'order_details.detail_id')
@@ -36,10 +37,11 @@ class OrderController extends Controller
             ->groupBy('id');
         }])->get()->transform(function ($item, $key) {
             $item->detaile = $item->details->where('qty_sisa', '>', 0);
+            $item->detaile = $item->detaile->count()>0 ? $item->detaile : null;
             unset($item->details);
             return $item;
         });
-
+        //dd($requests);
         return view('order.create', [
             'suppliers'=> Supplier::select('id', 'kd_supp', 'nm_supp')->get(),
             'requests' => $requests,
@@ -66,6 +68,7 @@ class OrderController extends Controller
                 'tgl_order'=> $request->tgl_order,
                 'total'    => $request->total,
                 'suplier_id'=> $request->supplier_id,
+                'request_id'=> $request->request_id,
             ]);
 
             foreach($request->barang_id as $idx=>$barang_id){
@@ -103,7 +106,23 @@ class OrderController extends Controller
      */
     public function edit($id)
     {
-        //
+        $requests = PRequest::with(['details'=> function ($query) {
+            $query->selectRaw('request_details.id,request_id,request_details.barang_id,qty_request, qty_request - COALESCE(SUM(qty_order), 0) as qty_sisa, barangs.id b_id, kd_barang, nm_brg,harga')
+            ->leftJoin('order_details', 'request_details.id', '=', 'order_details.detail_id')
+            ->leftJoin('barangs', 'barangs.id', '=', 'request_details.barang_id')
+            ->groupBy('id');
+        }])->get()->transform(function ($item, $key) {
+            $item->detaile = $item->details->where('qty_sisa', '>', 0);
+            $item->detaile = $item->detaile->count()>0 ? $item->detaile : null;
+            unset($item->details);
+            return $item;
+        });
+
+        return view('order.edit', [
+            'order'    => POrder::with('details')->find($id),
+            'suppliers'=> Supplier::select('id', 'kd_supp', 'nm_supp')->get(),
+            'requests' => $requests,
+        ]);
     }
 
     /**
@@ -115,7 +134,33 @@ class OrderController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        DB::transaction(function () use ($request, $id){
+
+            $details = [];
+
+            POrder::find($id)->update([
+                'tgl_order'=> $request->tgl_order,
+                'total'    => $request->total,
+                'suplier_id'=> $request->supplier_id,
+                'request_id'=> $request->request_id,
+            ]);
+
+            OrderDetail::where('order_id', $id)->delete();
+
+            foreach($request->barang_id as $idx=>$barang_id){
+                $details[] = [
+                    'order_id' =>$id,
+                    'barang_id'=>$barang_id,
+                    'detail_id'=>$request->detail_id[$idx],
+                    'qty_order'=>$request->qty_order[$idx],
+                    'subtotal' =>$request->subtotal[$idx]
+                ];
+            }
+
+            OrderDetail::insert($details);
+        });
+
+        return redirect()->route('order.index')->with('message', 'Create PO Successfull!');
     }
 
     /**
@@ -126,6 +171,14 @@ class OrderController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            POrder::findOrFail($id)->delete();
+
+            OrderDetail::where('order_id', $id)->delete();
+
+            return redirect()->route('order.index')->with('success', 'Delete Order Successfull!');
+       } catch (\Throwable $th) {
+            return redirect()->route('order.index')->with('fail', 'Delete Order Failed!');
+       }
     }
 }

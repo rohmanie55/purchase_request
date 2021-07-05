@@ -1,5 +1,5 @@
 @extends('layouts.main')
-@section('title') Manage Supplier @endsection
+@section('title') Master Supplier @endsection
 @section('content')
 <div class="page-inner">
     <div class="page-inner">
@@ -14,7 +14,7 @@
                     <i class="flaticon-right-arrow"></i>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('supplier.index') }}">Manage Supplier</a>
+                    <a href="{{ route('supplier.index') }}">Master Supplier</a>
                 </li>
                 <li class="separator">
                     <i class="flaticon-right-arrow"></i>

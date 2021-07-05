@@ -1,5 +1,5 @@
 @extends('layouts.main')
-@section('title') Manage User @endsection
+@section('title') Master User @endsection
 @section('content')
 <div class="page-inner">
     <div class="page-inner">
@@ -14,7 +14,7 @@
                     <i class="flaticon-right-arrow"></i>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('user.index') }}">Manage User</a>
+                    <a href="{{ route('user.index') }}">Master User</a>
                 </li>
                 <li class="separator">
                     <i class="flaticon-right-arrow"></i>
@@ -64,8 +64,9 @@
                         <div class="form-group @error('aksess') has-error has-feedback @enderror">
                             <label>Hak Akses</label>
                             <select name="aksess" class="form-control">
-                                <option {{ old('aksess')=='user' ? 'selected' : ''}}>user</option>
-                                <option {{ old('aksess')=='suplier' ? 'selected' : ''}}>suplier</option>
+                                <option {{ old('aksess')=='departement' ? 'selected' : ''}}>departement</option>
+                                <option {{ old('aksess')=='purchasing' ? 'selected' : ''}}>purchasing</option>
+                                <option {{ old('aksess')=='ap' ? 'selected' : ''}}>ap</option>
                                 <option {{ old('aksess')=='manager' ? 'selected' : ''}}>manager</option>
                             </select>
                             @error('aksess') 

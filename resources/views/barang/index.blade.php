@@ -1,5 +1,5 @@
 @extends('layouts.main')
-@section('title') Manage Barang @endsection
+@section('title') Master Barang @endsection
 @section('content')
 <div class="page-inner">
     <div class="page-inner">
@@ -14,7 +14,7 @@
                     <i class="flaticon-right-arrow"></i>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('user.index') }}">Manage Barang</a>
+                    <a href="{{ route('user.index') }}">Master Barang</a>
                 </li>
             </ul>
         </div>

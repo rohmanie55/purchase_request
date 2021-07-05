@@ -1,5 +1,5 @@
 @extends('layouts.main')
-@section('title') Manage Supplier @endsection
+@section('title') Master Supplier @endsection
 @section('content')
 <div class="page-inner">
     <div class="page-inner">

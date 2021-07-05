@@ -79,13 +79,16 @@
 										<div class="user-box">
 											<div class="avatar-lg"><img src="{{ asset('img/profile.jpg') }}" alt="image profile" class="avatar-img rounded"></div>
 											<div class="u-text">
-												<h4>Hizrian</h4>
-												<p class="text-muted">hello@example.com</p>
+												<h4>{{ auth()->user()->name }}</h4>
+												<p class="text-muted">{{ auth()->user()->aksess }}</p>
 											</div>
 										</div>
 									</li>
 									<li>
-										<a class="dropdown-item" href="#">Logout</a>
+										<form method="POST" action="{{ route('logout') }}" style="display: inline">
+											@csrf
+											<button class="dropdown-item" >Logout</button>
+										</form>
 									</li>
 								</div>
 							</ul>
@@ -123,19 +126,19 @@
 						<li class="nav-item {{ in_array(Route::currentRouteName(), ['user.index', 'user.create', 'user.edit']) ? 'active' : '' }}">
 							<a href="{{ route('user.index') }}">
 								<i class="fas fa-user-friends"></i>
-								<p>Manage User</p>
+								<p>Master User</p>
 							</a>
 						</li>
                         <li class="nav-item {{ in_array(Route::currentRouteName(), ['barang.index',  'barang.create', 'barang.edit']) ? 'active' : '' }}">
 							<a href="{{ route('barang.index') }}">
 								<i class="fas fa-box"></i>
-								<p>Manage Barang</p>
+								<p>Master Barang</p>
 							</a>
 						</li>
                         <li class="nav-item {{ in_array(Route::currentRouteName(), ['supplier.index',  'supplier.create', 'supplier.edit']) ? 'active' : '' }}">
 							<a href="{{ route('supplier.index') }}">
 								<i class="fas fa-truck-loading"></i>
-								<p>Manage Supplier</p>
+								<p>Master Supplier</p>
 							</a>
 						</li>
                         <li class="nav-item {{ in_array(Route::currentRouteName(), ['request.index', 'request.create', 'request.edit']) ? 'active' : '' }}">
@@ -144,7 +147,7 @@
 								<p>Purchase Request</p>
 							</a>
 						</li>
-                        <li class="nav-item {{ in_array(Route::currentRouteName(), ['order.index']) ? 'active' : '' }}">
+                        <li class="nav-item {{ in_array(Route::currentRouteName(), ['order.index', 'order.create', 'order.edit']) ? 'active' : '' }}">
 							<a href="{{ route('order.index') }}">
 								<i class="fas fa-shopping-cart"></i>
 								<p>Purchase Order</p>
@@ -184,7 +187,7 @@
     <script src="{{ asset('js/core/jquery.3.2.1.min.js') }}"></script>
 	<script src="{{ asset('js/core/popper.min.js') }}"></script>
 	<script src="{{ asset('js/core/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('js/plugin/datatables/datatables.min.js') }}"></script>
+    <script src="https://cdn.datatables.net/v/dt/dt-1.10.16/r-2.2.1/datatables.min.js"></script>
     {{-- <script src="{{ asset('js/plugin/bootstrap-notify/bootstrap-notify.min.js') }}"></script> --}}
     <script src="{{ asset('js/atlantis.min.js') }}"></script>
     <script src="{{ asset('js/plugin/sweetalert/sweetalert.min.js') }}"></script>

@@ -19,8 +19,10 @@ class CreatePurchaseOrderTable extends Migration
             $table->date('tgl_order');
             $table->double('total');
             $table->unsignedBigInteger('suplier_id');
+            $table->unsignedBigInteger('request_id');
             $table->timestamps();
             $table->foreign('suplier_id')->references('id')->on('suppliers')->onDelete('restrict');
+            $table->foreign('request_id')->references('id')->on('requests')->onDelete('restrict');
         });
     }
 

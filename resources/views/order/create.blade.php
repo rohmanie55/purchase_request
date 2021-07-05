@@ -59,7 +59,7 @@
                         <div class="form-group">
                             <label>Pilih PR</label>
                             <select id="request_id" name="request_id" class="form-control" onchange="loadRequest()">
-                                @foreach ($requests as $request)
+                                @foreach ($requests->where('detaile', '<>', null) as $request)
                                 <option value="{{ $request->id }}" >{{ $request->no_request }}</option>
                                 @endforeach
                             </select>
@@ -91,8 +91,9 @@
 
     loadRequest = ()=>{
         const req_id  = $("#request_id").val() || requests[0].id
+
         const request = requests.find(req=>req.id==req_id)
-        console.log(req_id)
+
         $('#barang_field').empty();
         request.detaile.forEach((detail, idx) => addField(detail, idx));
 
@@ -110,7 +111,7 @@
         </div>
         <div class="form-group col-2">
             <label>Qty</label>
-            <input name="qty_order[]" onchange="sumTotal(${idx})" min="0" type="number" class="form-control" value="${detail.qty_sisa}" placeholder="Qty">
+            <input name="qty_order[]" onchange="sumTotal(${idx})" min="0" max="${detail.qty_sisa}" type="number" class="form-control" value="${detail.qty_sisa}" placeholder="Qty">
         </div>
         <div class="form-group col-3">
             <label>Subtotal</label>
