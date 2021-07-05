@@ -13,9 +13,9 @@ class CreateUserSeed extends Seeder
      */
     public function run()
     {
-        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
-        User::truncate();
-        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+        // DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        // User::truncate();
+        // DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
         User::create([
             "name" => "Admin",
