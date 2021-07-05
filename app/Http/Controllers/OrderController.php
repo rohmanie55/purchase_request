@@ -19,7 +19,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        return view('order.index', ['orders'=> POrder::with('details.barang', 'supplier')->get() ]);
+        return view('order.index', ['orders'=> POrder::with('details.barang', 'supplier', 'approve:id,name')->get() ]);
     }
 
     /**
@@ -99,6 +99,22 @@ class OrderController extends Controller
     }
 
     /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function approve($id)
+    {
+        POrder::findOrFail($id)->update([
+            'approve_at' => now()->toDateTimeString(),
+            'approve_id' => auth()->user()->id,
+        ]);
+
+        return redirect()->route('order.index')->with('message', 'Approve PO Successfull!');
+    }
+
+    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
@@ -159,7 +175,7 @@ class OrderController extends Controller
             OrderDetail::insert($details);
         });
 
-        return redirect()->route('order.index')->with('message', 'Create PO Successfull!');
+        return redirect()->route('order.index')->with('message', 'Update PO Successfull!');
     }
 
     /**

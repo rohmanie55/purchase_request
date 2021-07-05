@@ -55,7 +55,7 @@
                                     <td>{{ $idx+1 }}</td>
                                     <td>{{ $barang->kd_barang }}</td>
                                     <td>{{ $barang->nm_brg }}</td>
-                                    <td>{{ $barang->harga }}</td>
+                                    <td>@currency($barang->harga)</td>
                                     <td>{{ $barang->stock }}</td>
                                     <td>
                                         <a href="{{ route('barang.edit', ['barang'=>$barang->id]) }}" class="btn btn-sm btn-info">

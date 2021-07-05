@@ -64,7 +64,7 @@
                                 <label>Nama Barang</label>
                                 <select name="barang_id[]" class="form-control">
                                     @foreach ($barangs as $barang)
-                                    <option value="{{ $barang->id }}" {{ $barang->id==old('barang_id') ? 'selected' : ''}}>{{ $barang->kd_barang }} - {{ $barang->nm_brg }} @ {{ $barang->harga }}</option>
+                                    <option value="{{ $barang->id }}" {{ $barang->id==old('barang_id') ? 'selected' : ''}}>{{ $barang->kd_barang }} - {{ $barang->nm_brg }} @ @currency($barang->harga)</option>
                                     @endforeach
                                 </select>
                                 @error('barang_id') 
@@ -110,7 +110,7 @@
 
     addField = () =>{
         let options = ''
-        barangs.forEach(barang=> options +=`<option value="${barang.id}">${barang.kd_barang} - ${barang.nm_brg}@${barang.harga}</option>`)
+        barangs.forEach(barang=> options +=`<option value="${barang.id}">${barang.kd_barang} - ${barang.nm_brg}@${convertToRupiah(barang.harga)}</option>`)
         const field = `
         <div class="form-group col-8 barang">
             <label>Nama Barang</label>

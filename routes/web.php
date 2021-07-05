@@ -15,7 +15,8 @@ Auth::routes(['register' => false]);
 Route::group(['middleware' => 'auth'], function()
 {
     Route::get('/', 'HomeController@index')->name('home');
-    Route::get('report', 'HomeController@index')->name('report');
+    Route::get('report', 'HomeController@report')->name('report');
+    Route::post('order/{order}/approve', 'OrderController@approve')->name('order.approve');
     Route::resource('user', 'UserController');
     Route::resource('request', 'RequestController');
     Route::resource('order', 'OrderController');

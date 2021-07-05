@@ -1,5 +1,5 @@
 @extends('layouts.main')
-@section('title') Purchase Order @endsection
+@section('title') Pembelian @endsection
 @section('content')
 <div class="page-inner">
     <div class="page-inner">
@@ -14,7 +14,7 @@
                     <i class="flaticon-right-arrow"></i>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('order.index') }}">Purchase Order</a>
+                    <a href="{{ route('pembelian.index') }}">Pembelian</a>
                 </li>
             </ul>
         </div>
@@ -32,34 +32,32 @@
                 @endif
                 <div class="card">
                     <div class="card-header">
-                        <a href="{{ route('order.create') }}" class="pull-right btn btn-sm btn-primary">
+                        <a href="{{ route('pembelian.create') }}" class="pull-right btn btn-sm btn-primary">
                             <i class="fas fa-plus"></i> Tambah
                         </a>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table id="table" class="display table table-striped table-hover"  width="100%">
+                            <table id="table" class="display table table-striped table-hover" >
                                 <thead>
                                 <tr>
-                                    <th>#</th>
-                                    <th>No Order</th>
-                                    <th>Tgl Order</th>
-                                    <th>Supplier</th>
-                                    <th>Total</th>
-                                    <th>Approve</th>
-                                    <th class="none">Detail Order</th>
-                                    <th style="width: 20%;">Option</th>
+                                    <td>#</td>
+                                    <td>Tgl Beli</td>
+                                    <td>No Faktur</td>
+                                    <td>No Order</td>
+                                    <td>Total Beli</td>
+                                    <th class="none">Detail Pembelian</th>
+                                    <td style="width: 15%;">Option</td>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach ($orders as $idx=>$order)
+                                @foreach ($pembelians as $idx=>$pembelian)
                                 <tr>
                                     <td>{{ $idx+1 }}</td>
-                                    <td>{{ $order->no_order }}</td>
-                                    <td>{{ $order->tgl_order }}</td>
-                                    <td>{{ $order->supplier->kd_supp ?? "" }} - {{ $order->supplier->nm_supp }}</td>
-                                    <td>@currency($order->total)</td>
-                                    <td>{{ $order->approve->name }} | {{ $order->approve_at }}</td>
+                                    <td>{{ $pembelian->tgl_beli }}</td>
+                                    <td>{{ $pembelian->no_faktur }}</td>
+                                    <td>{{ $pembelian->order->no_order }}</td>
+                                    <td>@currency($pembelian->total)</td>
                                     <td>
                                         <table style="width: 100%">
                                             <tr>
@@ -67,34 +65,24 @@
                                                 <td>Qty</td>
                                                 <td>Subtotal</td>
                                             </tr>
-                                            @foreach ($order->details as $idx=>$detail)
+                                            @foreach ($pembelian->details as $idx=>$detail)
                                             <tr>
                                                 <td>{{$detail->barang->kd_barang }} - {{ $detail->barang->nm_brg }}</td>
-                                                <td>{{ $detail->qty_order }}</td>
+                                                <td>{{ $detail->qty_brg }}</td>
                                                 <td>@currency($detail->subtotal)</td>
                                             </tr>
                                             @endforeach
                                         </table>
                                     </td>
                                     <td>
-                                        @if (is_null($order->approve_at) && in_array(auth()->user()->aksess, ['manager', 'purchasing']))
-                                        <form 
-                                        action="{{ route('order.approve', ['order'=>$order->id]) }}" 
-                                        method="POST"
-                                        style="display: inline"
-                                        onsubmit="return confirm('Are you sure approve this?')">
-                                            @csrf
-                                            <button class="btn btn-sm btn-success"> <i class="fas fa-check"></i></button>
-                                        </form>
-                                        @endif
-                                        <a href="{{ route('order.edit', ['order'=>$order->id]) }}" class="btn btn-sm btn-info">
+                                        <a href="{{ route('pembelian.edit', ['pembelian'=>$pembelian->id]) }}" class="btn btn-sm btn-info">
                                             <i class="fas fa-edit"></i>
                                         </a>
                                         <form 
-                                        action="{{ route('order.destroy', ['order'=>$order->id]) }}" 
+                                        action="{{ route('pembelian.destroy', ['pembelian'=>$pembelian->id]) }}" 
                                         method="POST"
                                         style="display: inline"
-                                        onsubmit="return confirm('Are you sure delete this data?')">
+                                        onsubmit="return confirm('Are you sure to delete?')">
                                             @csrf
                                             @method('DELETE')
                                             <button class="btn btn-sm btn-danger"> <i class="fas fa-trash"></i></button>
@@ -117,7 +105,7 @@
 <script >
     $(document).ready(function() {
         $('#table').DataTable({
-        'responsive': true
+            'responsive': true
         });
     });
 </script>

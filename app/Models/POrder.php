@@ -9,6 +9,11 @@ class POrder extends Model
     protected $table = 'orders';
     protected $guarded = [];
 
+    public function approve()
+    {
+        return $this->hasOne('App\User', 'id','approve_id');
+    }
+
     public function supplier()
     {
         return $this->hasOne('App\Models\Supplier', 'id','suplier_id');

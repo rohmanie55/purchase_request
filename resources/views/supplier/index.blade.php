@@ -65,7 +65,7 @@
                                         action="{{ route('supplier.destroy', ['supplier'=>$supplier->id]) }}" 
                                         method="POST"
                                         style="display: inline"
-                                        onsubmit="return beforeDelete()">
+                                        onsubmit="return confirm('Are you sure delete this data?')">
                                             @csrf
                                             @method('DELETE')
                                             <button class="btn btn-sm btn-danger"> <i class="fas fa-trash"></i></button>

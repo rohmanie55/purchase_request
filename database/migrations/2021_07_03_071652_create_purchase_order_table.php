@@ -20,9 +20,12 @@ class CreatePurchaseOrderTable extends Migration
             $table->double('total');
             $table->unsignedBigInteger('suplier_id');
             $table->unsignedBigInteger('request_id');
+            $table->unsignedBigInteger('approve_id');
+            $table->timestamp('approve_at')->nullable();
             $table->timestamps();
             $table->foreign('suplier_id')->references('id')->on('suppliers')->onDelete('restrict');
             $table->foreign('request_id')->references('id')->on('requests')->onDelete('restrict');
+            $table->foreign('approve_id')->references('id')->on('users')->onDelete('restrict');
         });
     }
 

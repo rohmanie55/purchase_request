@@ -107,7 +107,7 @@
             <input type="hidden" name="detail_id[]" value="${detail.id}">
             <input type="hidden" name="barang_id[]" value="${detail.b_id}">
             <input type="hidden" name="harga[]" value="${detail.harga}">
-            <input name='barang[]' class="form-control" value="${detail.kd_barang} - ${detail.nm_brg} @ ${detail.harga}" readonly>
+            <input name='barang[]' class="form-control" value="${detail.kd_barang} - ${detail.nm_brg} @ ${convertToRupiah(detail.harga)}" readonly>
         </div>
         <div class="form-group col-2">
             <label>Qty</label>

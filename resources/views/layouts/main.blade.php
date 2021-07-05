@@ -118,7 +118,7 @@
 					</div>
 					<ul class="nav nav-primary">
 						<li class="nav-item {{ in_array(Route::currentRouteName(), ['home']) ? 'active' : '' }}">
-							<a href="#">
+							<a href="/">
 								<i class="fas fa-home"></i>
 								<p>Dashboard</p>
 							</a>
@@ -153,7 +153,7 @@
 								<p>Purchase Order</p>
 							</a>
 						</li>
-                        <li class="nav-item {{ in_array(Route::currentRouteName(), ['pembelian.index']) ? 'active' : '' }}">
+                        <li class="nav-item {{ in_array(Route::currentRouteName(), ['pembelian.index', 'pembelian.create', 'pembelian.edit']) ? 'active' : '' }}">
 							<a href="{{ route('pembelian.index') }}">
 								<i class="fas fa-money-check"></i>
 								<p>Pembelian</p>
@@ -194,28 +194,12 @@
     <script src="{{ asset('js/plugin/jquery-scrollbar/jquery.scrollbar.min.js') }}"></script>
     <script src="{{ asset('js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js') }}"></script>
     <script>
-        function beforeDelete(e){
-            swal({
-                title: 'Are you sure?',
-                text: "You won't be able to revert this!",
-                type: 'warning',
-                buttons:{
-                    cancel: {
-                        visible: true,
-                        text : 'No, cancel!',
-                        className: 'btn btn-danger'
-                    },        			
-                    confirm: {
-                        text : 'Yes, delete it!',
-                        className : 'btn btn-primary'
-                    }
-                }
-            }).then((result) => {
-                if(!result){
-                    return;
-                }
-            })
-        }
+		    function convertToRupiah(angka){
+				var rupiah = '';		
+				var angkarev = angka.toString().split('').reverse().join('');
+				for(var i = 0; i < angkarev.length; i++) if(i%3 == 0) rupiah += angkarev.substr(i,3)+'.';
+				return 'Rp. '+rupiah.split('',rupiah.length-1).reverse().join('');
+			}
     </script>
     @yield('script')
 	{{-- 

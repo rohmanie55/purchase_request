@@ -14,7 +14,7 @@
                     <i class="flaticon-right-arrow"></i>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('barang.index') }}">Manage Barang</a>
+                    <a href="{{ route('barang.index') }}">Master Barang</a>
                 </li>
                 <li class="separator">
                     <i class="flaticon-right-arrow"></i>

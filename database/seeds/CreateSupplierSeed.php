@@ -1,10 +1,10 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\User;
+use App\Models\Supplier;
 use Illuminate\Support\Facades\DB;
 
-class CreateUserSeed extends Seeder
+class CreateSupplierSeed extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,14 +14,9 @@ class CreateUserSeed extends Seeder
     public function run()
     {
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
-        User::truncate();
+        Supplier::truncate();
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
-        User::create([
-            "name" => "Admin",
-            "username"=> "admin01",
-            "password"=> bcrypt("password"),
-            "aksess"=> "purchasing",
-        ]);
+        factory(Supplier::class, 10)->create();
     }
 }
