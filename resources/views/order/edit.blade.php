@@ -61,7 +61,7 @@
                         <div class="form-group">
                             <label>Pilih PR</label>
                             <select id="request_id" name="request_id" class="form-control" onchange="loadRequest()">
-                                @foreach ($requests->where('detaile', '<>', null) as $request)
+                                @foreach ($requests as $request)
                                 <option value="{{ $request->id }}" {{ $request->id==$order->request_id ? 'selected' : ''}}>
                                 {{ $request->no_request }}
                                 </option>
@@ -70,7 +70,7 @@
                         </div>
                         </div>
                         <div class="col-10 row pt-4" id="barang_field">
-                            @foreach ($requests->where('id', $order->request_id)->first()->detaile as $idx=>$detail)
+                            @foreach ($requests->where('id', $order->request_id)->first()->details as $idx=>$detail)
                             <div class="form-group col-7">
                                 <label>Nama Barang</label>
                                 <input type="hidden" name="detail_id[]" value="{{$detail->id}}">

@@ -114,7 +114,6 @@ class OrderController extends Controller
         }])->get()->transform(function ($item, $key) {
             $item->detaile = $item->details->where('qty_sisa', '>', 0);
             $item->detaile = $item->detaile->count()>0 ? $item->detaile : null;
-            unset($item->details);
             return $item;
         });
 
