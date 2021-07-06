@@ -36,7 +36,7 @@
                         <div class="col-10">
                         <div class="form-group @error('tgl_request') has-error has-feedback @enderror">
                             <label>Tgl Request</label>
-                            <input name="tgl_request" value="{{ old('tgl_request') }}" type="date" class="form-control" placeholder="Tgl Request">
+                            <input name="tgl_request" value="{{ old('tgl_request') }}" type="date" class="form-control" placeholder="Tgl Request" required>
                             @error('tgl_request') 
                             <small class="form-text text-danger">
                                 <strong>{{ $message }}</strong>
@@ -45,7 +45,7 @@
                         </div>
                         <div class="form-group @error('tgl_butuh') has-error has-feedback @enderror">
                             <label>Tgl Butuh</label>
-                            <input name="tgl_butuh" value="{{ old('tgl_butuh') }}" type="date" class="form-control" placeholder="Tgl Butuh">
+                            <input name="tgl_butuh" value="{{ old('tgl_butuh') }}" type="date" class="form-control" placeholder="Tgl Butuh" required>
                             @error('tgl_butuh') 
                             <small class="form-text text-danger">
                                 <strong>{{ $message }}</strong>
@@ -60,27 +60,17 @@
                             <div class="col-3">
                                 <button type="button" onclick="addField()" class="btn btn-sm btn-info pull-right"> <i class="fas fa-plus"></i></button>
                             </div>
-                            <div class="form-group barang col-8 @error('barang_id') has-error has-feedback @enderror">
+                            <div class="form-group barang col-8">
                                 <label>Nama Barang</label>
                                 <select name="barang_id[]" class="form-control">
                                     @foreach ($barangs as $barang)
-                                    <option value="{{ $barang->id }}" {{ $barang->id==old('barang_id') ? 'selected' : ''}}>{{ $barang->kd_barang }} - {{ $barang->nm_brg }} @ @currency($barang->harga)</option>
+                                    <option value="{{ $barang->id }}">{{ $barang->kd_barang }} - {{ $barang->nm_brg }} @ @currency($barang->harga)</option>
                                     @endforeach
                                 </select>
-                                @error('barang_id') 
-                                <small class="form-text text-danger">
-                                    <strong>{{ $message }}</strong>
-                                </small> 
-                                @enderror
                             </div>
-                            <div class="form-group qty col-3 @error('qty_request') has-error has-feedback @enderror">
+                            <div class="form-group qty col-3">
                                 <label>Qty</label>
-                                <input name="qty_request[]" value="{{ old('qty_request') }}" type="number" class="form-control" placeholder="Qty">
-                                @error('qty_request') 
-                                <small class="form-text text-danger">
-                                    <strong>{{ $message }}</strong>
-                                </small> 
-                                @enderror
+                                <input name="qty_request[]" min="0" value="{{ old('qty_request') }}" type="number" class="form-control" placeholder="Qty" required>
                             </div>
                             <div class="col-1 action">
                                 <label>&nbsp;</label>
@@ -120,7 +110,7 @@
         </div>
         <div class="form-group col-3 qty">
             <label>Qty</label>
-            <input name="qty_request[]" type="number" class="form-control" placeholder="Qty">
+            <input name="qty_request[]" min="0" required type="number" class="form-control" placeholder="Qty">
         </div>
         <div class="col-1 action">
             <label>&nbsp;</label>

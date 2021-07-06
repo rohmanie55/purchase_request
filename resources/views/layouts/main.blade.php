@@ -118,7 +118,7 @@
 					</div>
 					<ul class="nav nav-primary">
 						<li class="nav-item {{ in_array(Route::currentRouteName(), ['home']) ? 'active' : '' }}">
-							<a href="/">
+							<a href="{{ route('home') }}">
 								<i class="fas fa-home"></i>
 								<p>Dashboard</p>
 							</a>
@@ -155,7 +155,7 @@
 							</a>
 						</li>
 						@endif
-						@if (in_array(auth()->user()->aksess, ['purchasing', 'manager', 'ap']))
+						@if (in_array(auth()->user()->aksess, ['purchasing', 'manager']))
                         <li class="nav-item {{ in_array(Route::currentRouteName(), ['order.index', 'order.create', 'order.edit']) ? 'active' : '' }}">
 							<a href="{{ route('order.index') }}">
 								<i class="fas fa-shopping-cart"></i>

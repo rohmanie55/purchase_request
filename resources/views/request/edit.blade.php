@@ -37,7 +37,7 @@
                         <div class="col-10">
                         <div class="form-group @error('tgl_request') has-error has-feedback @enderror">
                             <label>Tgl Request</label>
-                            <input name="tgl_request" value="{{ old('tgl_request') ?? $request->tgl_request }}" type="date" class="form-control" placeholder="Tgl Request">
+                            <input name="tgl_request" value="{{ old('tgl_request') ?? $request->tgl_request }}" type="date" class="form-control" placeholder="Tgl Request" required>
                             @error('tgl_request') 
                             <small class="form-text text-danger">
                                 <strong>{{ $message }}</strong>
@@ -46,7 +46,7 @@
                         </div>
                         <div class="form-group @error('tgl_butuh') has-error has-feedback @enderror">
                             <label>Tgl Butuh</label>
-                            <input name="tgl_butuh" value="{{ old('tgl_butuh') ?? $request->tgl_butuh }}" type="date" class="form-control" placeholder="Tgl Butuh">
+                            <input name="tgl_butuh" value="{{ old('tgl_butuh') ?? $request->tgl_butuh }}" type="date" class="form-control" placeholder="Tgl Butuh" required>
                             @error('tgl_butuh') 
                             <small class="form-text text-danger">
                                 <strong>{{ $message }}</strong>
@@ -77,7 +77,7 @@
                             </div>
                             <div class="form-group qty col-3 @error('qty_request') has-error has-feedback @enderror">
                                 <label>Qty</label>
-                                <input name="qty_request[]" value="{{ old('qty_request') ?? $detail->qty_request }}" type="number" class="form-control" placeholder="Qty">
+                                <input name="qty_request[]" value="{{ old('qty_request') ?? $detail->qty_request }}" min="0" required type="number" class="form-control" placeholder="Qty">
                                 @error('qty_request') 
                                 <small class="form-text text-danger">
                                     <strong>{{ $message }}</strong>
@@ -123,7 +123,7 @@
         </div>
         <div class="form-group col-3 qty">
             <label>Qty</label>
-            <input name="qty_request[]" type="number" class="form-control" placeholder="Qty">
+            <input name="qty_request[]" min="0" required type="number"  class="form-control" placeholder="Qty">
         </div>
         <div class="col-1 action">
             <label>&nbsp;</label>

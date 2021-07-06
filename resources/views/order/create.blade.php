@@ -36,7 +36,7 @@
                         <div class="col-10">
                         <div class="form-group @error('tgl_order') has-error has-feedback @enderror">
                             <label>Tgl Order</label>
-                            <input name="tgl_order" value="{{ old('tgl_order') }}" type="date" class="form-control" placeholder="Tgl Order">
+                            <input name="tgl_order" value="{{ old('tgl_order') }}" type="date" class="form-control" placeholder="Tgl Order" required>
                             @error('tgl_order') 
                             <small class="form-text text-danger">
                                 <strong>{{ $message }}</strong>
@@ -45,7 +45,7 @@
                         </div>
                         <div class="form-group @error('suplier_id') has-error has-feedback @enderror">
                             <label>Pilih Supplier</label>
-                            <select name="supplier_id" class="form-control">
+                            <select name="supplier_id" class="form-control" required>
                                 @foreach ($suppliers as $supplier)
                                 <option value="{{ $supplier->id }}" {{ $supplier->id==old('supplier_id') ? 'selected' : ''}}>{{ $supplier->kd_supp }} - {{ $supplier->nm_supp }}</option>
                                 @endforeach
@@ -58,7 +58,7 @@
                         </div>
                         <div class="form-group @error('request_id') has-error has-feedback @enderror">
                             <label>Pilih PR</label>
-                            <select id="request_id" name="request_id" class="form-control" onchange="loadRequest()">
+                            <select id="request_id" name="request_id" class="form-control" onchange="loadRequest()" required>
                                 @foreach ($requests->where('detaile', '<>', null) as $request)
                                 <option value="{{ $request->id }}" >{{ $request->no_request }}</option>
                                 @endforeach
@@ -116,7 +116,7 @@
         </div>
         <div class="form-group col-2">
             <label>Qty</label>
-            <input name="qty_order[]" onchange="sumTotal(${idx})" min="0" max="${detail.qty_sisa}" type="number" class="form-control" value="${detail.qty_sisa}" placeholder="Qty">
+            <input name="qty_order[]" onchange="sumTotal(${idx})" required min="0" max="${detail.qty_sisa}" type="number" class="form-control" value="${detail.qty_sisa}" placeholder="Qty">
         </div>
         <div class="form-group col-3">
             <label>Subtotal</label>

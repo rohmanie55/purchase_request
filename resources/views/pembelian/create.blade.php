@@ -116,7 +116,7 @@ addField = (detail, idx) =>{
     </div>
     <div class="form-group col-2">
         <label>Qty</label>
-        <input name="qty_brg[]" onchange="sumTotal(${idx})" min="0" max="${detail.qty_sisa}" type="number" class="form-control" value="${detail.qty_sisa}" placeholder="Qty">
+        <input name="qty_brg[]" onchange="sumTotal(${idx})" min="0" max="${detail.qty_sisa}" type="number" class="form-control" value="${detail.qty_sisa}" placeholder="Qty" required>
     </div>
     <div class="form-group col-3">
         <label>Subtotal</label>

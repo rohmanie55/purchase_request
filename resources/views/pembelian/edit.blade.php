@@ -37,7 +37,7 @@
                         <div class="col-10">
                         <div class="form-group @error('no_beli') has-error has-feedback @enderror">
                             <label>No Beli</label>
-                            <input name="no_beli" value="{{ old('no_beli') ?? $pembelian->no_beli }}" type="text" class="form-control" placeholder="No Beli">
+                            <input name="no_beli" value="{{ old('no_beli') ?? $pembelian->no_beli }}" type="text" class="form-control" placeholder="No Beli" required>
                             @error('no_beli') 
                             <small class="form-text text-danger">
                                 <strong>{{ $message }}</strong>
@@ -46,7 +46,7 @@
                         </div>
                         <div class="form-group @error('no_faktur') has-error has-feedback @enderror">
                             <label>No Faktur</label>
-                            <input name="no_faktur" value="{{ old('no_faktur') ?? $pembelian->no_faktur }}" type="text" class="form-control" placeholder="No Faktur">
+                            <input name="no_faktur" value="{{ old('no_faktur') ?? $pembelian->no_faktur }}" type="text" class="form-control" placeholder="No Faktur" required>
                             @error('no_faktur') 
                             <small class="form-text text-danger">
                                 <strong>{{ $message }}</strong>
@@ -55,7 +55,7 @@
                         </div>
                         <div class="form-group @error('tgl_beli') has-error has-feedback @enderror">
                             <label>Tgl Beli</label>
-                            <input name="tgl_beli" value="{{ old('tgl_beli') ?? $pembelian->tgl_beli }}" type="date" class="form-control" >
+                            <input name="tgl_beli" value="{{ old('tgl_beli') ?? $pembelian->tgl_beli }}" type="date" class="form-control" required>
                             @error('tgl_beli') 
                             <small class="form-text text-danger">
                                 <strong>{{ $message }}</strong>
@@ -64,7 +64,7 @@
                         </div>
                         <div class="form-group">
                             <label>Pilih PO</label>
-                            <select id="order_id" name="order_id" class="form-control" onchange="loadRequest()">
+                            <select id="order_id" name="order_id" class="form-control" onchange="loadRequest()" required>
                                 @foreach ($orders->where('details', '<>', null) as $order)
                                 <option value="{{ $order->id }}" {{ $order->id==$pembelian->order_id ? 'selected' : ''}}>{{ $order->no_order }}</option>
                                 @endforeach
@@ -82,7 +82,7 @@
                             </div>
                             <div class="form-group col-2">
                                 <label>Qty</label>
-                                <input name="qty_brg[]" onchange="sumTotal({{$idx}})" min="0"  type="number" class="form-control" value="{{ $pembelian->details->where('detail_id', $detail->id)->first()->qty_brg }}" placeholder="Qty">
+                                <input name="qty_brg[]" onchange="sumTotal({{$idx}})" min="0"  type="number" class="form-control" value="{{ $pembelian->details->where('detail_id', $detail->id)->first()->qty_brg }}" placeholder="Qty" required>
                             </div>
                             <div class="form-group col-3">
                                 <label>Subtotal</label>
@@ -134,7 +134,7 @@ addField = (detail, idx) =>{
     </div>
     <div class="form-group col-2">
         <label>Qty</label>
-        <input name="qty_brg[]" onchange="sumTotal(${idx})" min="0" max="${detail.qty_sisa}" type="number" class="form-control" value="${detail.qty_sisa}" placeholder="Qty">
+        <input name="qty_brg[]" onchange="sumTotal(${idx})" min="0" max="${detail.qty_sisa}" type="number" class="form-control" value="${detail.qty_sisa}" placeholder="Qty" required>
     </div>
     <div class="form-group col-3">
         <label>Subtotal</label>
