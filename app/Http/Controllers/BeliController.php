@@ -31,7 +31,7 @@ class BeliController extends Controller
             $query->selectRaw('order_details.id,order_id,order_details.barang_id,qty_order, qty_order - COALESCE(SUM(qty_brg), 0) as qty_sisa, barangs.id b_id, kd_barang, nm_brg,harga')
             ->leftJoin('pembelian_details', 'order_details.id', '=', 'pembelian_details.detail_id')
             ->leftJoin('barangs', 'barangs.id', '=', 'order_details.barang_id')
-            ->groupBy('id');
+            ->groupBy('order_details.id');
         }])->whereNotNull('approve_at')->get()->transform(function ($item, $key) {
             $item->detaile = $item->details->where('qty_sisa', '>', 0);
             $item->detaile = $item->detaile->count()>0 ? $item->detaile : null;
@@ -111,7 +111,7 @@ class BeliController extends Controller
             $query->selectRaw('order_details.id,order_id,order_details.barang_id,qty_order, qty_order - COALESCE(SUM(qty_brg), 0) as qty_sisa, barangs.id b_id, kd_barang, nm_brg,harga')
             ->leftJoin('pembelian_details', 'order_details.id', '=', 'pembelian_details.detail_id')
             ->leftJoin('barangs', 'barangs.id', '=', 'order_details.barang_id')
-            ->groupBy('id');
+            ->groupBy('order_details.id');
         }])->whereNotNull('approve_at')->get()->transform(function ($item, $key) {
             $item->detaile = $item->details->where('qty_sisa', '>', 0);
             $item->detaile = $item->detaile->count()>0 ? $item->detaile : null;

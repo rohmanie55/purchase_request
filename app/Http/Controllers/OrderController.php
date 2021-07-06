@@ -34,7 +34,7 @@ class OrderController extends Controller
             $query->selectRaw('request_details.id,request_id,request_details.barang_id,qty_request, qty_request - COALESCE(SUM(qty_order), 0) as qty_sisa, barangs.id b_id, kd_barang, nm_brg,harga')
             ->leftJoin('order_details', 'request_details.id', '=', 'order_details.detail_id')
             ->leftJoin('barangs', 'barangs.id', '=', 'request_details.barang_id')
-            ->groupBy('id');
+            ->groupBy('request_details.id');
         }])->get()->transform(function ($item, $key) {
             $item->detaile = $item->details->where('qty_sisa', '>', 0);
             $item->detaile = $item->detaile->count()>0 ? $item->detaile : null;
@@ -133,7 +133,7 @@ class OrderController extends Controller
             $query->selectRaw('request_details.id,request_id,request_details.barang_id,qty_request, qty_request - COALESCE(SUM(qty_order), 0) as qty_sisa, barangs.id b_id, kd_barang, nm_brg,harga')
             ->leftJoin('order_details', 'request_details.id', '=', 'order_details.detail_id')
             ->leftJoin('barangs', 'barangs.id', '=', 'request_details.barang_id')
-            ->groupBy('id');
+            ->groupBy('request_details.id');
         }])->get()->transform(function ($item, $key) {
             $item->detaile = $item->details->where('qty_sisa', '>', 0);
             $item->detaile = $item->detaile->count()>0 ? $item->detaile : null;
