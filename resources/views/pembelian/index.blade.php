@@ -42,9 +42,9 @@
                                 <thead>
                                 <tr>
                                     <td>#</td>
+                                    <td>No Beli</td>
                                     <td>Tgl Beli</td>
                                     <td>No Faktur</td>
-                                    <td>No Order</td>
                                     <td>Total Beli</td>
                                     <th class="none">Detail Pembelian</th>
                                     <td style="width: 15%;">Option</td>
@@ -54,19 +54,23 @@
                                 @foreach ($pembelians as $idx=>$pembelian)
                                 <tr>
                                     <td>{{ $idx+1 }}</td>
+                                    <td>{{ $pembelian->no_beli }}</td>
                                     <td>{{ $pembelian->tgl_beli }}</td>
                                     <td>{{ $pembelian->no_faktur }}</td>
-                                    <td>{{ $pembelian->order->no_order }}</td>
                                     <td>@currency($pembelian->total)</td>
                                     <td>
                                         <table style="width: 100%">
                                             <tr>
+                                                <td>No Order</td>
+                                                <td>Tgl Order</td>
                                                 <td>Barang</td>
                                                 <td>Qty</td>
                                                 <td>Subtotal</td>
                                             </tr>
                                             @foreach ($pembelian->details as $idx=>$detail)
                                             <tr>
+                                                <td>{{ $pembelian->order->no_order}}</td>
+                                                <td>{{ $pembelian->order->tgl_order}}</td>
                                                 <td>{{$detail->barang->kd_barang }} - {{ $detail->barang->nm_brg }}</td>
                                                 <td>{{ $detail->qty_brg }}</td>
                                                 <td>@currency($detail->subtotal)</td>

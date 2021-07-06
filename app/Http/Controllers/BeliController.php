@@ -32,7 +32,7 @@ class BeliController extends Controller
             ->leftJoin('pembelian_details', 'order_details.id', '=', 'pembelian_details.detail_id')
             ->leftJoin('barangs', 'barangs.id', '=', 'order_details.barang_id')
             ->groupBy('id');
-        }])->get()->transform(function ($item, $key) {
+        }])->whereNotNull('approve_at')->get()->transform(function ($item, $key) {
             $item->detaile = $item->details->where('qty_sisa', '>', 0);
             $item->detaile = $item->detaile->count()>0 ? $item->detaile : null;
             unset($item->details);
@@ -52,6 +52,12 @@ class BeliController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'no_beli'  => 'required|max:100',
+            'no_faktur'=> 'required|max:100',
+            'tgl_beli' => 'required'
+        ]);
+
         DB::transaction(function () use ($request){
 
             $details = [];
@@ -65,13 +71,15 @@ class BeliController extends Controller
             ]);
 
             foreach($request->barang_id as $idx=>$barang_id){
-                $details[] = [
-                    'beli_id' =>$pb->id,
-                    'barang_id'=>$barang_id,
-                    'detail_id'=>$request->detail_id[$idx],
-                    'qty_brg'=>$request->qty_brg[$idx],
-                    'subtotal' =>$request->subtotal[$idx]
-                ];
+                if($request->qty_brg[$idx]>0){
+                    $details[] = [
+                        'beli_id' =>$pb->id,
+                        'barang_id'=>$barang_id,
+                        'detail_id'=>$request->detail_id[$idx],
+                        'qty_brg'=>$request->qty_brg[$idx],
+                        'subtotal' =>$request->subtotal[$idx]
+                    ];
+                }
             }
 
             PembelianDetail::insert($details);
@@ -104,7 +112,7 @@ class BeliController extends Controller
             ->leftJoin('pembelian_details', 'order_details.id', '=', 'pembelian_details.detail_id')
             ->leftJoin('barangs', 'barangs.id', '=', 'order_details.barang_id')
             ->groupBy('id');
-        }])->get()->transform(function ($item, $key) {
+        }])->whereNotNull('approve_at')->get()->transform(function ($item, $key) {
             $item->detaile = $item->details->where('qty_sisa', '>', 0);
             $item->detaile = $item->detaile->count()>0 ? $item->detaile : null;
             return $item;

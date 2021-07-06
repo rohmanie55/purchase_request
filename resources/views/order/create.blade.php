@@ -56,13 +56,18 @@
                             </small> 
                             @enderror
                         </div>
-                        <div class="form-group">
+                        <div class="form-group @error('request_id') has-error has-feedback @enderror">
                             <label>Pilih PR</label>
                             <select id="request_id" name="request_id" class="form-control" onchange="loadRequest()">
                                 @foreach ($requests->where('detaile', '<>', null) as $request)
                                 <option value="{{ $request->id }}" >{{ $request->no_request }}</option>
                                 @endforeach
                             </select>
+                            @error('request_id') 
+                            <small class="form-text text-danger">
+                                <strong>{{ $message }}</strong>
+                            </small> 
+                            @enderror
                         </div>
                         </div>
                         <div class="col-10 row pt-4" id="barang_field">

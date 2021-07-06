@@ -59,18 +59,22 @@
                                     <td>{{ $order->tgl_order }}</td>
                                     <td>{{ $order->supplier->kd_supp ?? "" }} - {{ $order->supplier->nm_supp }}</td>
                                     <td>@currency($order->total)</td>
-                                    <td>{{ $order->approve->name }} | {{ $order->approve_at }}</td>
+                                    <td>{{ $order->approve->name ?? '' }} {{ $order->approve_at }}</td>
                                     <td>
                                         <table style="width: 100%">
                                             <tr>
+                                                <td>No Request</td>
+                                                <td>Tgl Request</td>
                                                 <td>Barang</td>
                                                 <td>Qty</td>
                                                 <td>Subtotal</td>
                                             </tr>
                                             @foreach ($order->details as $idx=>$detail)
                                             <tr>
+                                                <td>{{ $order->request->no_request }}</td>
+                                                <td>{{ $order->request->tgl_request }}</td>
                                                 <td>{{$detail->barang->kd_barang }} - {{ $detail->barang->nm_brg }}</td>
-                                                <td>{{ $detail->qty_order }}</td>
+                                                <td>{{ $detail->qty_order}} {{ $detail->barang->unit }}</td>
                                                 <td>@currency($detail->subtotal)</td>
                                             </tr>
                                             @endforeach

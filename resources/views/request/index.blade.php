@@ -42,7 +42,7 @@
                                 <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>No Purchase</th>
+                                    <th>No Request</th>
                                     <th>Tgl Request</th>
                                     <th>Tgl Butuh</th>
                                     <th>User Request</th>
@@ -67,7 +67,7 @@
                                             @foreach ($request->details as $idx=>$detail)
                                             <tr>
                                                 <td>{{$detail->barang->kd_barang }} - {{ $detail->barang->nm_brg }}</td>
-                                                <td>{{ $detail->qty_request }}</td>
+                                                <td>{{ $detail->qty_request }} {{ $detail->barang->unit }}</td>
                                             </tr>
                                             @endforeach
                                         </table>
@@ -80,7 +80,7 @@
                                         action="{{ route('request.destroy', ['request'=>$request->id]) }}" 
                                         method="POST"
                                         style="display: inline"
-                                        onsubmit="return beforeDelete()">
+                                        onsubmit="return confirm('Are you sure to delete this data?')">
                                             @csrf
                                             @method('DELETE')
                                             <button class="btn btn-sm btn-danger"> <i class="fas fa-trash"></i></button>

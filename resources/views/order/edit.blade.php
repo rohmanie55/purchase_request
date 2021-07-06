@@ -58,7 +58,7 @@
                             </small> 
                             @enderror
                         </div>
-                        <div class="form-group">
+                        <div class="form-group @error('request_id') has-error has-feedback @enderror">
                             <label>Pilih PR</label>
                             <select id="request_id" name="request_id" class="form-control" onchange="loadRequest()">
                                 @foreach ($requests as $request)
@@ -67,6 +67,11 @@
                                 </option>
                                 @endforeach
                             </select>
+                            @error('request_id') 
+                            <small class="form-text text-danger">
+                                <strong>{{ $message }}</strong>
+                            </small> 
+                            @enderror
                         </div>
                         </div>
                         <div class="col-10 row pt-4" id="barang_field">
@@ -76,18 +81,18 @@
                                 <input type="hidden" name="detail_id[]" value="{{$detail->id}}">
                                 <input type="hidden" name="barang_id[]" value="{{$detail->b_id}}">
                                 <input type="hidden" name="harga[]" value="{{ $detail->harga}}">
-                                <input name='barang[]' class="form-control" value="{{ $detail->kd_barang}} - {{$detail->nm_brg}} @ {{ $detail->harga }}" readonly>
+                                <input name='barang[]' class="form-control" value="{{ $detail->kd_barang}} - {{$detail->nm_brg}} @ @currency($detail->harga)" readonly>
                             </div>
                             <div class="form-group col-2">
                                 <label>Qty</label>
-                                <input name="qty_order[]" onchange="sumTotal({{$idx}})" min="0"  type="number" class="form-control" value="{{ $order->details->where('detail_id', $detail->id)->first()->qty_order }}" placeholder="Qty">
+                                <input name="qty_order[]" onchange="sumTotal({{$idx}})" min="0"  max="{{ $detail->qty_sisa }}" type="number" class="form-control" value="{{ $order->details->where('detail_id', $detail->id)->first()->qty_order ?? 0 }}" placeholder="Qty">
                             </div>
                             <div class="form-group col-3">
                                 <label>Subtotal</label>
-                                <input type="number" class="form-control" readonly name="subtotal[]" value="{{ $order->details->where('detail_id', $detail->id)->first()->subtotal }}">
+                                <input type="number" class="form-control" readonly name="subtotal[]" value="{{ $order->details->where('detail_id', $detail->id)->first()->subtotal ?? 0 }}">
                             </div>
-                            <div class="col-9 text-right total"><b>Total:</b></div><div class="col-3 total"><input name="total" type="number" value="{{ $order->total }}" class="form-control" readonly></div>
                             @endforeach
+                            <div class="col-9 text-right total"><b>Total:</b></div><div class="col-3 total"><input name="total" type="number" value="{{ $order->total }}" class="form-control" readonly></div>
                         </div>
                     </div>
                     <div class="card-footer d-flex justify-content-end">

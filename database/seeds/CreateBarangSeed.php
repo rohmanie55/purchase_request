@@ -13,10 +13,6 @@ class CreateBarangSeed extends Seeder
      */
     public function run()
     {
-        // DB::statement('SET FOREIGN_KEY_CHECKS=0;');
-        // Barang::truncate();
-        // DB::statement('SET FOREIGN_KEY_CHECKS=1;');
-
         factory(Barang::class, 10)->create();
     }
 }

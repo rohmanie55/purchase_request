@@ -14,6 +14,11 @@ class POrder extends Model
         return $this->hasOne('App\User', 'id','approve_id');
     }
 
+    public function request()
+    {
+        return $this->hasOne('App\Models\PRequest', 'id','request_id');
+    }
+
     public function supplier()
     {
         return $this->hasOne('App\Models\Supplier', 'id','suplier_id');

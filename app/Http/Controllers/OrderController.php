@@ -19,7 +19,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        return view('order.index', ['orders'=> POrder::with('details.barang', 'supplier', 'approve:id,name')->get() ]);
+        return view('order.index', ['orders'=> POrder::with('details.barang', 'request:id,no_request,tgl_request','supplier', 'approve:id,name')->get() ]);
     }
 
     /**
@@ -56,6 +56,11 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'tgl_order'  => 'required',
+            'supplier_id' => 'required',
+            'request_id' => 'required'
+        ]);
 
         DB::transaction(function () use ($request){
 
@@ -72,13 +77,15 @@ class OrderController extends Controller
             ]);
 
             foreach($request->barang_id as $idx=>$barang_id){
-                $details[] = [
-                    'order_id' =>$po->id,
-                    'barang_id'=>$barang_id,
-                    'detail_id'=>$request->detail_id[$idx],
-                    'qty_order'=>$request->qty_order[$idx],
-                    'subtotal' =>$request->subtotal[$idx]
-                ];
+                if($request->qty_order[$idx]>0){
+                    $details[] = [
+                        'order_id' =>$po->id,
+                        'barang_id'=>$barang_id,
+                        'detail_id'=>$request->detail_id[$idx],
+                        'qty_order'=>$request->qty_order[$idx],
+                        'subtotal' =>$request->subtotal[$idx]
+                    ];
+                }
             }
 
             OrderDetail::insert($details);

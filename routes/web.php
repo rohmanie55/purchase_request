@@ -16,6 +16,7 @@ Route::group(['middleware' => 'auth'], function()
 {
     Route::get('/', 'HomeController@index')->name('home');
     Route::get('report', 'HomeController@report')->name('report');
+    Route::post('report/{report}/print', 'HomeController@print')->name('print');
     Route::post('order/{order}/approve', 'OrderController@approve')->name('order.approve');
     Route::resource('user', 'UserController');
     Route::resource('request', 'RequestController');

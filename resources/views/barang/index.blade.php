@@ -65,7 +65,7 @@
                                         action="{{ route('barang.destroy', ['barang'=>$barang->id]) }}" 
                                         method="POST"
                                         style="display: inline"
-                                        onsubmit="return beforeDelete()">
+                                        onsubmit="return confirm('Are you sure to delete this data?')">
                                             @csrf
                                             @method('DELETE')
                                             <button class="btn btn-sm btn-danger"> <i class="fas fa-trash"></i></button>
