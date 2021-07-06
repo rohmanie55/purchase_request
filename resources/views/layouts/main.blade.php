@@ -123,42 +123,54 @@
 								<p>Dashboard</p>
 							</a>
 						</li>
+						@if (in_array(auth()->user()->aksess, ['purchasing']))
 						<li class="nav-item {{ in_array(Route::currentRouteName(), ['user.index', 'user.create', 'user.edit']) ? 'active' : '' }}">
 							<a href="{{ route('user.index') }}">
 								<i class="fas fa-user-friends"></i>
 								<p>Master User</p>
 							</a>
 						</li>
+						@endif
+						@if (in_array(auth()->user()->aksess, ['purchasing']))
                         <li class="nav-item {{ in_array(Route::currentRouteName(), ['barang.index',  'barang.create', 'barang.edit']) ? 'active' : '' }}">
 							<a href="{{ route('barang.index') }}">
 								<i class="fas fa-box"></i>
 								<p>Master Barang</p>
 							</a>
 						</li>
+						@endif
+						@if (in_array(auth()->user()->aksess, ['purchasing']))
                         <li class="nav-item {{ in_array(Route::currentRouteName(), ['supplier.index',  'supplier.create', 'supplier.edit']) ? 'active' : '' }}">
 							<a href="{{ route('supplier.index') }}">
 								<i class="fas fa-truck-loading"></i>
 								<p>Master Supplier</p>
 							</a>
 						</li>
+						@endif
+						@if (in_array(auth()->user()->aksess, ['purchasing', 'departement']))
                         <li class="nav-item {{ in_array(Route::currentRouteName(), ['request.index', 'request.create', 'request.edit']) ? 'active' : '' }}">
 							<a href="{{ route('request.index') }}">
 								<i class="fas fa-shopping-basket"></i>
 								<p>Purchase Request</p>
 							</a>
 						</li>
+						@endif
+						@if (in_array(auth()->user()->aksess, ['purchasing', 'manager', 'ap']))
                         <li class="nav-item {{ in_array(Route::currentRouteName(), ['order.index', 'order.create', 'order.edit']) ? 'active' : '' }}">
 							<a href="{{ route('order.index') }}">
 								<i class="fas fa-shopping-cart"></i>
 								<p>Purchase Order</p>
 							</a>
 						</li>
+						@endif
+						@if (in_array(auth()->user()->aksess, ['purchasing', 'manager', 'ap']))
                         <li class="nav-item {{ in_array(Route::currentRouteName(), ['pembelian.index', 'pembelian.create', 'pembelian.edit']) ? 'active' : '' }}">
 							<a href="{{ route('pembelian.index') }}">
 								<i class="fas fa-money-check"></i>
 								<p>Pembelian</p>
 							</a>
 						</li>
+						@endif
                         <li class="nav-item {{ in_array(Route::currentRouteName(), ['report']) ? 'active' : '' }}">
 							<a href="{{ route('report') }}">
 								<i class="fas fa-receipt"></i>

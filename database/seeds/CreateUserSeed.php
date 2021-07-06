@@ -19,7 +19,7 @@ class CreateUserSeed extends Seeder
 
         User::create([
             "name" => "Admin",
-            "username"=> "admin01",
+            "username"=> "admin",
             "password"=> bcrypt("password"),
             "aksess"=> "purchasing",
         ]);
