@@ -62,27 +62,18 @@
                                 <button type="button" onclick="addField()" class="btn btn-sm btn-info pull-right"> <i class="fas fa-plus"></i></button>
                             </div>
                             @foreach ($request->details as $idx=>$detail)
-                            <div class="form-group barang col-8 @error('barang_id') has-error has-feedback @enderror">
+                            <div class="form-group barang col-8">
                                 <label>Nama Barang</label>
                                 <select name="barang_id[]" class="form-control">
                                     @foreach ($barangs as $barang)
                                     <option value="{{ $barang->id }}" {{ $barang->id==$detail->barang_id ? 'selected' : ''}}>{{ $barang->kd_barang }} - {{ $barang->nm_brg }} @ {{ $barang->harga }}</option>
                                     @endforeach
                                 </select>
-                                @error('barang_id') 
-                                <small class="form-text text-danger">
-                                    <strong>{{ $message }}</strong>
-                                </small> 
-                                @enderror
                             </div>
-                            <div class="form-group qty col-3 @error('qty_request') has-error has-feedback @enderror">
+                            <div class="form-group qty col-3">
                                 <label>Qty</label>
-                                <input name="qty_request[]" value="{{ old('qty_request') ?? $detail->qty_request }}" min="0" required type="number" class="form-control" placeholder="Qty">
-                                @error('qty_request') 
-                                <small class="form-text text-danger">
-                                    <strong>{{ $message }}</strong>
-                                </small> 
-                                @enderror
+                                <input name="qty_request[]" value="{{ $detail->qty_request }}" min="0" required type="number" class="form-control" placeholder="Qty">
+
                             </div>
                             <div class="col-1 action">
                                 <label>&nbsp;</label>
