@@ -64,6 +64,7 @@
                             @foreach ($request->details as $idx=>$detail)
                             <div class="form-group barang col-8">
                                 <label>Nama Barang</label>
+                                <input type="hidden" name="id[]" value="{{ $detail->id }}">
                                 <select name="barang_id[]" class="form-control">
                                     @foreach ($barangs as $barang)
                                     <option value="{{ $barang->id }}" {{ $barang->id==$detail->barang_id ? 'selected' : ''}}>{{ $barang->kd_barang }} - {{ $barang->nm_brg }} @ {{ $barang->harga }}</option>

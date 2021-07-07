@@ -106,20 +106,32 @@ class RequestController extends Controller
         ]);
 
         DB::transaction(function () use ($request, $id){
-            $details = [];
+            // $details = [];
+            $forms   = collect();
+            $details = RequestDetail::where('request_id', $id)->get();
 
-            RequestDetail::where('request_id', $id)->delete();
+            foreach($request->barang_id as $idx=>$barang_id){
+                $forms->push(['id'=>$request->id[$idx] ?? null, 'barang_id'=>$barang_id, 'qty_request'=> $request->qty_request[$idx], 'request_id'=>$id]);
+            }
 
             PRequest::find($id)->update([
                 'tgl_request'=> $request->tgl_request,
                 'tgl_butuh'  => $request->tgl_butuh,
             ]);
 
-            foreach($request->barang_id as $idx=>$barang_id){
-                $details[] = ['barang_id'=>$barang_id, 'qty_request'=> $request->qty_request[$idx], 'request_id'=>$id];
+            foreach($details as $detail){
+                $form = $forms->where('id', $detail->id)->first();
+                if($form){
+                    $detail->barang_id  = $form['barang_id'];
+                    $detail->qty_request= $form['qty_request'];
+                    $detail->request_id= $form['request_id'];
+                    $detail->save();
+                }else{
+                    $detail->delete();
+                }
             }
 
-            RequestDetail::insert($details);
+            RequestDetail::insert($forms->whereNull('id')->toArray());
         });
 
         return redirect()->route('request.index')->with('message', 'Update PR Successfull!');
