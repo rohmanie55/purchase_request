@@ -147,7 +147,7 @@
 							</a>
 						</li>
 						@endif
-						@if (in_array(auth()->user()->aksess, ['purchasing', 'departement']))
+						@if (in_array(auth()->user()->aksess, ['departement']))
                         <li class="nav-item {{ in_array(Route::currentRouteName(), ['request.index', 'request.create', 'request.edit']) ? 'active' : '' }}">
 							<a href="{{ route('request.index') }}">
 								<i class="fas fa-shopping-basket"></i>
@@ -163,7 +163,7 @@
 							</a>
 						</li>
 						@endif
-						@if (in_array(auth()->user()->aksess, ['purchasing', 'manager', 'ap']))
+						@if (in_array(auth()->user()->aksess, ['manager', 'ap']))
                         <li class="nav-item {{ in_array(Route::currentRouteName(), ['pembelian.index', 'pembelian.create', 'pembelian.edit']) ? 'active' : '' }}">
 							<a href="{{ route('pembelian.index') }}">
 								<i class="fas fa-money-check"></i>
