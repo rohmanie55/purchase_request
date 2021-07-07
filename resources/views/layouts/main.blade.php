@@ -163,7 +163,7 @@
 							</a>
 						</li>
 						@endif
-						@if (in_array(auth()->user()->aksess, ['manager', 'ap']))
+						@if (in_array(auth()->user()->aksess, ['ap']))
                         <li class="nav-item {{ in_array(Route::currentRouteName(), ['pembelian.index', 'pembelian.create', 'pembelian.edit']) ? 'active' : '' }}">
 							<a href="{{ route('pembelian.index') }}">
 								<i class="fas fa-money-check"></i>
