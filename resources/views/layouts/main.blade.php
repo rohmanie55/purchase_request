@@ -29,7 +29,8 @@
 			<div class="logo-header" data-background-color="blue">
 				
 				<a href="/" class="logo">
-					<img src="{{ asset('img/logo.svg') }}" alt="navbar brand" class="navbar-brand">
+					<img src="{{ asset('img/brand/hs.png') }}" alt="navbar brand" class="navbar-brand" style="max-height: 40px;background:white">
+					<span style="color: white"><b>Hotel Santika</b></span>
 				</a>
                 @if (auth()->check())
 				<button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse" data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
