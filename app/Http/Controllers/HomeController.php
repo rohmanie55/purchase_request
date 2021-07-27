@@ -46,7 +46,9 @@ class HomeController extends Controller
                 })
                 ->when(!is_null($request->dari) && !is_null($request->sampai), function($query) use($request){
                     $query->whereBetween('tgl_order', [$request->dari, $request->sampai]);
-                })->get();
+                })
+                ->whereNotNull('approve_id')
+                ->get();
 
                 return PDF::loadView('report.order', ['data'=>$data])->setPaper('a4', 'landscape')->stream("purchase_order_report.pdf", array("Attachment" => false));
                 break;
