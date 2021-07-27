@@ -30,7 +30,7 @@
 				
 				<a href="/" class="logo">
 					<img src="{{ asset('img/brand/hs.png') }}" alt="navbar brand" class="navbar-brand" style="max-height: 40px;background:white">
-					<span style="color: white"><b>Hotel Santika</b></span>
+					<span style="color: white"><b class="small">Hotel Santika</b></span>
 				</a>
                 @if (auth()->check())
 				<button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse" data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">

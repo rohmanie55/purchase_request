@@ -31,10 +31,28 @@
                     </div>
                 @endif
                 <div class="card">
-                    <div class="card-header">
-                        <a href="{{ route('order.create') }}" class="pull-right btn btn-sm btn-primary">
-                            <i class="fas fa-plus"></i> Tambah
-                        </a>
+                    <div class="card-header row">
+                        <div class="col-12 col-lg-9">
+                            <form action="{{ route('print', ['report'=>'order']) }}" method="POST" class="form-inline" target="_blank">
+                                @csrf
+                                <div class="form-group">
+                                    <label>Dari:&nbsp;</label>
+                                    <input type="date" name="dari" value="{{ now()->subDays(30)->format('Y-m-d') }}" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label>Sampai :&nbsp;</label>
+                                    <input type="date" name="sampai" value="{{ now()->format('Y-m-d') }}" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <button class="btn btn-sm btn-primary"><i class="fas fa-print"></i> Cetak</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col-12 col-lg-3 text-right">
+                            <a href="{{ route('order.create') }}" class="btn btn-sm btn-primary mt-3">
+                                <i class="fas fa-plus"></i> Tambah
+                            </a>
+                        </div>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
