@@ -39,7 +39,7 @@
                   <img src="{{ asset('img/brand/hs.jpg') }}" style="max-height: 90px">
               </td>
               <td style="width: 70%;padding-left:10px;">
-                  <h3>PT. Grahawita Santika </h3>
+                  <h3>Hotel Santika Cikarang </h3>
                   <span class="small">Jl. Raya Cikarang Cibarusah, Pasirsari, Cikarang Sel</span>
                   <span class="small">Telepon: (021) 89835533 Fax: (021) 89835533 Email: cikarang@reservation.santika.com</span>
               </td>
