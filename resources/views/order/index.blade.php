@@ -99,7 +99,7 @@
                                         </table>
                                     </td>
                                     <td>
-                                        @if (is_null($order->approve_at) && in_array(auth()->user()->aksess, ['manager', 'purchasing']))
+                                        @if (is_null($order->approve_at) && auth()->user()->aksess=='manager')
                                         <form 
                                         action="{{ route('order.approve', ['order'=>$order->id]) }}" 
                                         method="POST"

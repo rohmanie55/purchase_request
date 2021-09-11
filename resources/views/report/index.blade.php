@@ -3,6 +3,7 @@
 @section('content')
 <div class="page-inner mt-5">
     <div class="row justify-content-center">
+        @if (auth()->user()->aksess=='departement' || auth()->user()->aksess=='manager')
         <div class="col-12 col-md-5">
             <div class="card">
                 <h3 class="card-header">Laporan Bulanan Request</h3>
@@ -54,7 +55,8 @@
                 </div>
             </div>
         </div>
-
+        @endif
+        @if (auth()->user()->aksess=='purchasing' || auth()->user()->aksess=='manager')
         <div class="col-12 col-md-5">
             <div class="card">
                 <h3 class="card-header">Laporan Bulanan Order</h3>
@@ -106,7 +108,8 @@
                 </div>
             </div>
         </div>
-
+        @endif
+        @if (auth()->user()->aksess=='ap' || auth()->user()->aksess=='manager')
         <div class="col-12 col-md-5">
             <div class="card">
                 <h3 class="card-header">Laporan Bulanan Pembelian</h3>
@@ -158,6 +161,7 @@
                 </div>
             </div>
         </div>
+        @endif
     </div>
 </div>
 @endsection

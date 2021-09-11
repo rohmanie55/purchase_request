@@ -124,7 +124,7 @@
 								<p>Dashboard</p>
 							</a>
 						</li>
-						@if (in_array(auth()->user()->aksess, ['purchasing']))
+						@if (in_array(auth()->user()->aksess, ['purchasing', 'manager']))
 						<li class="nav-item {{ in_array(Route::currentRouteName(), ['user.index', 'user.create', 'user.edit']) ? 'active' : '' }}">
 							<a href="{{ route('user.index') }}">
 								<i class="fas fa-user-friends"></i>
